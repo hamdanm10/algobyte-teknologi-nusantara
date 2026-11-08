@@ -15,7 +15,7 @@
                 <x-logo class="h-8 w-auto" />
             </a>
 
-            <nav class="hidden flex-1 items-center gap-1 lg:ml-6 lg:flex" aria-label="{{ __('site.nav.label') }}">
+            <nav class="hidden items-center gap-1 lg:ml-auto lg:flex" aria-label="{{ __('site.nav.label') }}">
                 @foreach ($links as $key => $label)
                     <a href="{{ localized_route($key) }}"
                        @if ($current === $key) aria-current="page" @endif
@@ -25,7 +25,7 @@
                 @endforeach
             </nav>
 
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 lg:ml-3">
                 <x-language-switcher :alternates="$alternates" class="hidden lg:block" />
                 <div class="hidden lg:block">
                     <x-button :href="localized_route('contact')" class="!px-5 !py-3">{{ __('site.nav.cta') }}</x-button>

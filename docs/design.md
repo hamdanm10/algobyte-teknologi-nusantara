@@ -96,7 +96,7 @@ Blog, detail proyek, dan studi kasus panjang **ditunda** sampai ada konten.
 
 ```
 ┌───────────────────────────────────────────────┐
-│ [logo] Layanan Proyek Tentang        [ID v] [Hubungi kami] │  navigasi mengambang
+│ [logo]        Layanan Proyek Tentang  [ID v] [Hubungi kami] │  navigasi mengambang
 ├───────────────────────────────────────────────┤
 │  Judul hero, rata kiri     ┌─────────────────────  hero: ilustrasi lebar 16:9
 │  pengantar 1-2 kalimat     │  ilustrasi lebar ──►  menembus tepi kanan
@@ -127,7 +127,7 @@ Blog, detail proyek, dan studi kasus panjang **ditunda** sampai ada konten.
 
 | Komponen | Aturan |
 | --- | --- |
-| Navigasi | Mengambang, `surface`, radius 8, bayangan navigasi. Desktop: logo dan menu rata kiri, pengalih bahasa dan tombol ajakan rata kanan. Mobile: tombol menu membuka panel penuh. Tautan aktif ditandai garis `brand` di bawahnya |
+| Navigasi | Mengambang, `surface`, radius 8, bayangan navigasi. Desktop: logo di kiri; menu, pengalih bahasa, dan tombol ajakan berderet di kanan. Mobile: tombol menu membuka panel penuh. Tautan aktif ditandai garis `brand` di bawahnya |
 | Pengalih bahasa | Dropdown (`<details>`): tombol berisi ikon globe, kode bahasa aktif (ID atau EN), dan panah; daftar berisi kode semua bahasa dengan tanda centang pada yang aktif. Nama lengkap bahasa hanya untuk pembaca layar. Tertutup dengan klik di luar atau Escape. Di footer terbuka ke atas |
 | Tombol utama | Isian `brand`, teks `ink`, radius 6, padding 14×30. Hover: isian `plum`, teks `paper`. Satu tombol utama per layar |
 | Tombol gelap | Isian `ink`, teks `paper`, khusus di atas isian `brand` (panel ajakan) |
