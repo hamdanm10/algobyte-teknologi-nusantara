@@ -22,6 +22,7 @@ Dokumen lintas-topik yang bukan fitur (contoh `setup.md`, `deploy.md`, `ci-cd/`)
 | --- | --- | --- |
 | Fitur | [`implementation-plan.md`](implementation-plan.md) | Status dan tautan dokumen fitur |
 | Desain | [`design.md`](design.md) | Warna, tipografi, komponen, dan struktur halaman situs |
+| Ilustrasi | [`illustrations.md`](illustrations.md) | Daftar slot ilustrasi, ukuran, dan arahan membuatnya di Recraft |
 
 ## Aturan menulis dokumen
 

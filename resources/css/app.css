@@ -1,9 +1,183 @@
 @import 'tailwindcss';
+@import '@fontsource/outfit/latin-500.css';
+@import '@fontsource/outfit/latin-600.css';
+@import '@fontsource/plus-jakarta-sans/latin-400.css';
+@import '@fontsource/plus-jakarta-sans/latin-500.css';
+@import '@fontsource/plus-jakarta-sans/latin-600.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --color-brand: #eb5b00;
+    --color-brand-soft: #fff0e5;
+    --color-highlight: #ffb200;
+    --color-accent: #d91656;
+    --color-plum: #640d5f;
+    --color-ink: #1f0a1e;
+    --color-ink-muted: #5e4b5d;
+    --color-paper: #fbf8fb;
+    --color-surface: #ffffff;
+    --color-line: #eadfe9;
+
+    --radius-control: 6px;
+    --radius-nav: 8px;
+    --radius-panel: 12px;
+
+    --shadow-card: 0 1px 14px 0 rgb(100 13 95 / 0.1);
+    --shadow-nav: 0 1px 20px 0 rgb(100 13 95 / 0.14);
+
+    --ease-framer: cubic-bezier(0.44, 0, 0.56, 1);
+
+    --breakpoint-sm: 640px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        background: var(--color-paper);
+        color: var(--color-ink);
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        color: var(--color-ink);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+    }
+}
+
+/* Extend an element from the content box to the viewport edge, keeping the text inside the container. */
+@utility bleed-r {
+    margin-right: calc(-1 * max(var(--gutter), (100vw - 1172px) / 2));
+}
+
+@utility bleed-l {
+    margin-left: calc(-1 * max(var(--gutter), (100vw - 1172px) / 2));
+}
+
+@layer components {
+    .text-hero {
+        font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4rem);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+    }
+
+    .text-section {
+        font-size: clamp(1.875rem, 1.4rem + 1.9vw, 2.75rem);
+        line-height: 1.1;
+        letter-spacing: -0.015em;
+    }
+
+    .text-card-title {
+        font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+        line-height: 1.25;
+        letter-spacing: -0.01em;
+    }
+
+    .text-lead {
+        font-size: clamp(1.125rem, 1.07rem + 0.25vw, 1.25rem);
+        line-height: 1.6;
+        color: var(--color-ink-muted);
+    }
+
+    .container-site {
+        width: 100%;
+        max-width: calc(1172px + 2 * var(--gutter));
+        margin-inline: auto;
+        padding-inline: var(--gutter);
+    }
+
+    .section {
+        padding-block: 4rem;
+    }
+
+    @media (min-width: 1024px) {
+        .section {
+            padding-block: 6rem;
+        }
+    }
+
+    .link {
+        color: var(--color-plum);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    .link:hover {
+        color: var(--color-accent);
+    }
+
+    /* Dot grid texture: a quiet pattern behind illustrations and on the brand panel. */
+    .bg-dots {
+        background-image: radial-gradient(circle, rgb(100 13 95 / 0.16) 1.5px, transparent 1.5px);
+        background-size: 22px 22px;
+    }
+
+    .bg-dots-ink {
+        background-image: radial-gradient(circle, rgb(31 10 30 / 0.16) 1.5px, transparent 1.5px);
+        background-size: 22px 22px;
+    }
+
+    /* One entrance on first load: the hero illustration slides in from the edge it bleeds to. */
+    .hero-enter {
+        animation: hero-enter 800ms var(--ease-framer) both;
+    }
+
+    @keyframes hero-enter {
+        from {
+            opacity: 0;
+            transform: translateX(32px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .hero-enter {
+            animation: none;
+        }
+    }
+}
+
+:root {
+    --gutter: 20px;
+}
+
+@media (min-width: 640px) {
+    :root {
+        --gutter: 40px;
+    }
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --gutter: 64px;
+    }
 }

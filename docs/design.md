@@ -6,7 +6,7 @@ Pedoman visual untuk landing page dan halaman publik Algobyte Teknologi Nusantar
 
 ### Arah
 
-Situs perusahaan perangkat lunak yang tenang dan rapi, dengan **satu hal yang diingat**: balok isometrik dari logo, dipakai sebagai ilustrasi hero yang tersusun saat halaman dibuka. Selain itu halaman dibuat diam: latar terang, tipografi besar, kartu sederhana.
+Situs perusahaan perangkat lunak yang tenang dan rapi, dengan **satu hal yang diingat**: ilustrasi lebar yang menembus tepi layar, bergantian di sisi kanan dan kiri seperti di qvery.ai, sementara teks tetap di dalam container. Selain itu halaman dibuat tenang: latar terang, tipografi besar, kartu sederhana.
 
 Dari qvery.ai diambil: hero dua kolom (teks kiri, ilustrasi kanan), lebar isi 1172px, bar navigasi mengambang dengan bayangan lembut, kartu radius 12, tombol radius 6, bagian "Before We Start" (FAQ), bagian industri/layanan berbentuk kartu, dan nada tulisan yang pendek dan lugas. **Tidak diambil**: palet teal dan biru, font Lato/Inter, teks huruf kapital untuk callout, dan latar biru-dingin `#F6F8FF` (bentrok dengan oranye logo).
 
@@ -70,10 +70,10 @@ Radius dibedakan menurut hierarki (kecil untuk kontrol, besar untuk wadah), tida
 
 ### Gerak
 
-- **Satu momen**: balok hero tersusun dalam sekitar 900ms saat halaman pertama dibuka, memakai kurva `cubic-bezier(.44, 0, .56, 1)` seperti qvery.ai. Hanya sekali per kunjungan.
+- **Satu momen**: ilustrasi hero meluncur masuk dari tepi kanan dalam 800ms saat halaman pertama dibuka, memakai kurva `cubic-bezier(.44, 0, .56, 1)` seperti qvery.ai. Hanya sekali per kunjungan.
 - Respons terhadap aksi pengguna: hover dan fokus tombol, buka-tutup FAQ, menu mobile. Durasi 150 sampai 250ms.
 - Tidak ada animasi masuk per seksi, tidak ada parallax, tidak ada hover bergerak di setiap kartu.
-- `prefers-reduced-motion`: balok langsung tampil dalam posisi akhir, tanpa transisi.
+- `prefers-reduced-motion`: ilustrasi langsung tampil di posisi akhir, tanpa transisi.
 
 ## Struktur halaman
 
@@ -84,35 +84,33 @@ Beranda                /
 Layanan                /layanan            (en: /en/services)
   Detail layanan       /layanan/{slug}
 Proyek                 /proyek             (en: /en/projects)
-  Detail proyek        /proyek/{slug}
 Tentang                /tentang            (en: /en/about)
 Kontak                 /kontak             (en: /en/contact)
 Kebijakan privasi      /kebijakan-privasi  (en: /en/privacy-policy)
 Syarat dan ketentuan   /syarat-ketentuan   (en: /en/terms)
 ```
 
-Blog dan studi kasus panjang **ditunda** sampai ada konten.
+Blog, detail proyek, dan studi kasus panjang **ditunda** sampai ada konten.
 
 ### Beranda
 
 ```
 ┌───────────────────────────────────────────────┐
-│ [logo]   Layanan Proyek Tentang    ID|EN [Hubungi kami] │  navigasi mengambang
+│ [logo]        Layanan Proyek Tentang  [ID v] [Hubungi kami] │  navigasi mengambang
 ├───────────────────────────────────────────────┤
-│  Judul hero, rata kiri          ┌──────────┐  │
-│  maksimal 3 baris               │  balok   │  │  hero
-│  pengantar 1-2 kalimat          │ isometrik│  │
-│  [Mulai proyek] [Lihat proyek]  └──────────┘  │
+│  Judul hero, rata kiri     ┌─────────────────────  hero: ilustrasi lebar 16:9
+│  pengantar 1-2 kalimat     │  ilustrasi lebar ──►  menembus tepi kanan
+│  [Jadwalkan konsultasi] [Lihat layanan]  └──────────────────
 ├───────────────────────────────────────────────┤
 │  Layanan: 3 sampai 4 kartu, ikon + 2 kalimat  │
 ├───────────────────────────────────────────────┤
 │  Cara kerja: 4 langkah berurutan (bernomor)   │
+│  ═══ ilustrasi panjang selebar layar ═══════  │
 ├───────────────────────────────────────────────┤
-│  Proyek pilihan: 2 sampai 3 kartu besar       │
+│  Seksi gelap (ink): 3 baris bergantian,       │
+│  teks ◄─► ilustrasi menembus kiri / kanan     │
 ├───────────────────────────────────────────────┤
-│  Seksi gelap (ink): alasan memilih Algobyte   │
-├───────────────────────────────────────────────┤
-│  Sebelum mulai: FAQ 6 sampai 8 pertanyaan     │
+│  Sebelum mulai: FAQ + ilustrasi tepi kiri     │
 ├───────────────────────────────────────────────┤
 │  Ajakan penutup + tombol                      │
 ├───────────────────────────────────────────────┤
@@ -121,29 +119,36 @@ Blog dan studi kasus panjang **ditunda** sampai ada konten.
 ```
 
 - Penomoran **hanya** di "Cara kerja", karena isinya memang urutan. Seksi lain tidak bernomor.
-- Hero rata kiri di desktop, ilustrasi di bawah teks di mobile.
+- Hero rata kiri di desktop. Di mobile ilustrasi turun ke bawah teks dan memakai lebar layar penuh.
+- **Ilustrasi menembus tepi** hanya di desktop (mulai 1024px) dan hanya pada sisi yang menjauhi teks. Teks, kartu, dan tombol tetap di dalam container 1172px. Dipasang lewat komponen `x-bleed` (kiri atau kanan) dan utilitas `bleed-l`/`bleed-r` di `app.css`; bagian pembungkusnya memakai `overflow-hidden`.
 - Bagian bukti sosial (logo klien, angka) hanya dipasang bila datanya nyata. Tidak ada angka karangan.
 
 ## Komponen
 
 | Komponen | Aturan |
 | --- | --- |
-| Navigasi | Mengambang, `surface`, radius 8, bayangan navigasi. Mobile: tombol menu membuka panel penuh. Tautan aktif ditandai garis `brand` di bawahnya |
+| Navigasi | Mengambang, `surface`, radius 8, bayangan navigasi. Desktop: logo di kiri; menu, pengalih bahasa, dan tombol ajakan berderet di kanan. Mobile: tombol menu membuka panel penuh. Tautan aktif ditandai garis `brand` di bawahnya |
+| Pengalih bahasa | Dropdown (`<details>`): tombol berisi ikon globe, kode bahasa aktif (ID atau EN), dan panah; daftar berisi kode semua bahasa dengan tanda centang pada yang aktif. Nama lengkap bahasa hanya untuk pembaca layar. Tertutup dengan klik di luar atau Escape. Di footer terbuka ke atas |
 | Tombol utama | Isian `brand`, teks `ink`, radius 6, padding 14×30. Hover: isian `plum`, teks `paper`. Satu tombol utama per layar |
+| Tombol gelap | Isian `ink`, teks `paper`, khusus di atas isian `brand` (panel ajakan) |
 | Tombol sekunder | Garis `ink` 1,5px, tanpa isian. Hover: isian `ink`, teks `paper` |
 | Tautan | `plum`, garis bawah selalu terlihat |
 | Kartu | `surface`, radius 12, bayangan kartu, tanpa batas. Seluruh kartu bisa diklik bila mengarah ke halaman lain |
 | FAQ | Elemen `<details>`; panah memutar saat terbuka. Judul pertanyaan memakai gaya judul kartu |
 | Formulir | Label di atas kolom, kolom `surface` dengan batas `line`, fokus: garis `accent` 2px. Pesan galat menyebut apa yang salah dan cara memperbaikinya |
-| Footer | Latar `ink`, teks `paper`, tautan dikelompokkan, pengalih bahasa terlihat |
+| Footer | Latar `surface` dengan garis atas `line`, karena wordmark logo gelap tidak terbaca di latar `ink`. Tautan dikelompokkan, pengalih bahasa terlihat |
 
 Keadaan wajib ada untuk setiap komponen interaktif: normal, hover, fokus (cincin 2px `accent` berjarak 2px), aktif, nonaktif.
 
-## Ilustrasi hero
+## Ilustrasi
 
-Tiga balok isometrik dari logo (dua tegak, satu kecil di atas), masing-masing dengan tiga sisi: `brand`, `accent`, `plum`, dan `highlight` untuk balok kecil. Dibuat sebagai SVG inline, bukan gambar raster. Balok naik ke posisinya berurutan (kiri, tengah, atas). Di mobile ukurannya mengecil, bentuk tetap.
+Ilustrasi dibuat di Recraft oleh pemilik proyek. **Bentuknya lebar (landscape), gaya datar 2D, bukan 3D.** Rasio 16:9 untuk hero, header halaman, dan baris fitur; 4:1 untuk ilustrasi panjang selebar layar di bagian "Cara kerja"; 3:2 untuk kartu layanan.
 
-Logo dipakai apa adanya dan tidak diubah warnanya. `logo-2.png` (susun vertikal) untuk footer dan halaman legal, `logo(1).png` (mendatar) untuk navigasi, `favicon.png` untuk ikon tab. Berkas aslinya raster; kerjakan versi SVG bila tersedia dari pemilik logo.
+Situs menyediakan **slot** di hero, kartu layanan, "Cara kerja", baris "Kenapa bekerja dengan kami", FAQ, panel ajakan, header tiap halaman, dan halaman galat. Slot menampilkan placeholder sampai file dipasang. Daftar slot, ukuran, nama file, dan arahan gaya: [`illustrations.md`](illustrations.md).
+
+Latar ilustrasi: transparan di atas `paper` (hero, header halaman, FAQ), tint warna merek (kartu layanan), atau `ink` (baris di bagian gelap). Panel ajakan memakai isian `brand` penuh dengan tombol `ink`.
+
+Logo dipakai apa adanya dan tidak diubah warnanya, jadi selalu ditaruh di latar terang. `logo-2.png` (susun vertikal) untuk footer dan halaman legal, `logo(1).png` (mendatar) untuk navigasi, `favicon.png` untuk ikon tab. Berkas aslinya raster; kerjakan versi SVG bila tersedia dari pemilik logo.
 
 ## Gaya tulisan
 
@@ -165,20 +170,20 @@ Logo dipakai apa adanya dan tidak diubah warnanya. `logo-2.png` (susun vertikal)
 
 - Blade dengan layout `resources/views/layouts/app.blade.php` dan komponen anonim di `resources/views/components` (navigasi, tombol, kartu, FAQ, footer). Halaman di `resources/views/pages`.
 - Token warna dan font didefinisikan di `@theme` pada `resources/css/app.css`, tidak ada nilai warna mentah di Blade.
-- Satu controller per halaman statis atau `Route::view` bila tanpa data; formulir kontak lewat Action dan Form Request, sesuai `AGENTS.md`.
-- Tidak ada framework JavaScript. Skrip kecil hanya untuk menu mobile dan pengalih bahasa.
+- Route didaftarkan sekali per bahasa dengan nama `{kunci}.{bahasa}` (contoh `services.en`); slug tiap bahasa ada di `lang/{bahasa}/routes.php`. Di Blade pakai `localized_route('services')`. Bahasa dipilih dari segmen pertama path oleh middleware `SetLocaleFromPath`.
+- Controller per kelompok halaman; formulir kontak lewat Action dan Form Request, sesuai `AGENTS.md`. Pesan formulir disimpan di tabel `contact_messages` (belum dikirim ke email, karena alamat penerima belum ada).
+- Tidak ada framework JavaScript. Skrip kecil hanya untuk menu mobile dan menutup dropdown bahasa.
 
 ## Langkah dan test
 
-1. Tinjau dokumen ini, lalu putuskan hal di bagian **Ditunda**.
-2. Pasang font, token tema, dan layout dasar.
-3. Bangun komponen, lalu Beranda, lalu halaman lain satu per satu.
-4. Feature test: setiap halaman mengembalikan 200 di kedua bahasa, `hreflang` benar, formulir kontak menolak data tidak valid dan menyimpan atau mengirim data valid.
-5. Periksa kontras tiap pasangan warna, tampilan 360px, dan navigasi keyboard.
+1. Pasang font, token tema, dan layout dasar. *(selesai)*
+2. Bangun komponen, lalu Beranda, lalu halaman lain. *(selesai)*
+3. Feature test: setiap halaman mengembalikan 200 di kedua bahasa, `hreflang` benar, 404 memakai bahasa path, formulir kontak menolak data tidak valid, honeypot, throttle, dan menyimpan data valid. *(selesai)*
+4. Periksa kontras tiap pasangan warna dan navigasi keyboard secara manual.
 
 ## Ditunda
 
-- Blog, studi kasus panjang, dan halaman tim, sampai kontennya ada.
+- Blog, studi kasus panjang, halaman tim, bagian "Proyek pilihan" di beranda, dan halaman detail proyek, sampai ada proyek nyata. Halaman `/proyek` sementara menampilkan keadaan kosong.
 - Mode gelap penuh. Situs hanya memakai seksi gelap di tengah halaman.
 - Isi nyata: daftar layanan, proyek, kontak, dan alamat. Sampai tersedia, halaman memakai teks sementara yang ditandai jelas dan tidak berisi angka atau klien karangan.
 - Versi SVG logo.
