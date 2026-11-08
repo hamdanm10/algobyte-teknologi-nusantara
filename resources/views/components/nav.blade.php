@@ -26,7 +26,7 @@
             </nav>
 
             <div class="flex items-center gap-3">
-                <x-language-switcher :alternates="$alternates" class="hidden lg:flex" />
+                <x-language-switcher :alternates="$alternates" class="hidden lg:block" />
                 <div class="hidden lg:block">
                     <x-button :href="localized_route('contact')" class="!px-5 !py-3">{{ __('site.nav.cta') }}</x-button>
                 </div>

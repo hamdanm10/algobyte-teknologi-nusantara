@@ -32,7 +32,7 @@
     <div class="border-t border-line">
         <div class="container-site flex flex-col gap-3 py-5 text-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between">
             <p>&copy; {{ now()->year }} {{ config('site.name') }}. {{ __('site.footer.rights') }}</p>
-            <x-language-switcher :alternates="$alternates" />
+            <x-language-switcher :alternates="$alternates" placement="up" />
         </div>
     </div>
 </footer>

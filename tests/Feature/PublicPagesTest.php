@@ -111,4 +111,14 @@ class PublicPagesTest extends TestCase
             unlink($path);
         }
     }
+
+    public function test_language_dropdown_lists_both_languages_and_marks_the_current_one(): void
+    {
+        $html = $this->get('/en/about')->getContent();
+
+        $this->assertStringContainsString('data-dropdown', $html);
+        $this->assertStringContainsString('hreflang="id" lang="id"', $html);
+        $this->assertStringContainsString('href="'.url('/tentang').'"', $html);
+        $this->assertStringContainsString('aria-current="true"', $html);
+    }
 }

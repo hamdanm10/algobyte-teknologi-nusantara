@@ -128,6 +128,7 @@ Blog, detail proyek, dan studi kasus panjang **ditunda** sampai ada konten.
 | Komponen | Aturan |
 | --- | --- |
 | Navigasi | Mengambang, `surface`, radius 8, bayangan navigasi. Mobile: tombol menu membuka panel penuh. Tautan aktif ditandai garis `brand` di bawahnya |
+| Pengalih bahasa | Dropdown (`<details>`): tombol berisi ikon globe, nama bahasa aktif, dan panah; daftar berisi semua bahasa dengan tanda centang pada yang aktif. Tertutup dengan klik di luar atau Escape. Di footer terbuka ke atas |
 | Tombol utama | Isian `brand`, teks `ink`, radius 6, padding 14×30. Hover: isian `plum`, teks `paper`. Satu tombol utama per layar |
 | Tombol gelap | Isian `ink`, teks `paper`, khusus di atas isian `brand` (panel ajakan) |
 | Tombol sekunder | Garis `ink` 1,5px, tanpa isian. Hover: isian `ink`, teks `paper` |
@@ -171,7 +172,7 @@ Logo dipakai apa adanya dan tidak diubah warnanya, jadi selalu ditaruh di latar 
 - Token warna dan font didefinisikan di `@theme` pada `resources/css/app.css`, tidak ada nilai warna mentah di Blade.
 - Route didaftarkan sekali per bahasa dengan nama `{kunci}.{bahasa}` (contoh `services.en`); slug tiap bahasa ada di `lang/{bahasa}/routes.php`. Di Blade pakai `localized_route('services')`. Bahasa dipilih dari segmen pertama path oleh middleware `SetLocaleFromPath`.
 - Controller per kelompok halaman; formulir kontak lewat Action dan Form Request, sesuai `AGENTS.md`. Pesan formulir disimpan di tabel `contact_messages` (belum dikirim ke email, karena alamat penerima belum ada).
-- Tidak ada framework JavaScript. Skrip kecil hanya untuk menu mobile dan pengalih bahasa.
+- Tidak ada framework JavaScript. Skrip kecil hanya untuk menu mobile dan menutup dropdown bahasa.
 
 ## Langkah dan test
 

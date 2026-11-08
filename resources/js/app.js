@@ -29,3 +29,34 @@ if (nav) {
         }
     });
 }
+
+const dropdowns = document.querySelectorAll('[data-dropdown]');
+
+dropdowns.forEach((dropdown) => {
+    dropdown.addEventListener('toggle', () => {
+        if (dropdown.open) {
+            dropdowns.forEach((other) => other !== dropdown && other.removeAttribute('open'));
+        }
+    });
+});
+
+document.addEventListener('click', (event) => {
+    dropdowns.forEach((dropdown) => {
+        if (dropdown.open && !dropdown.contains(event.target)) {
+            dropdown.removeAttribute('open');
+        }
+    });
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') {
+        return;
+    }
+
+    dropdowns.forEach((dropdown) => {
+        if (dropdown.open) {
+            dropdown.removeAttribute('open');
+            dropdown.querySelector('summary').focus();
+        }
+    });
+});

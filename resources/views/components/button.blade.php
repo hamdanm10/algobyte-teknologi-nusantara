@@ -1,7 +1,7 @@
 @props(['href' => null, 'variant' => 'primary', 'type' => 'button'])
 
 @php
-    $base = 'inline-flex items-center justify-center rounded-control px-7 py-3.5 font-display text-[1.0625rem] font-medium leading-none transition-colors duration-200 ease-out';
+    $base = 'inline-flex whitespace-nowrap items-center justify-center rounded-control px-7 py-3.5 font-display text-[1.0625rem] font-medium leading-none transition-colors duration-200 ease-out';
     $variants = [
         'primary' => 'bg-brand text-ink hover:bg-plum hover:text-paper',
         'secondary' => 'border-[1.5px] border-ink text-ink hover:bg-ink hover:text-paper',
