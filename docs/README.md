@@ -21,6 +21,7 @@ Dokumen lintas-topik yang bukan fitur (contoh `setup.md`, `deploy.md`, `ci-cd/`)
 | Area | Indeks | Isi |
 | --- | --- | --- |
 | Fitur | [`implementation-plan.md`](implementation-plan.md) | Status dan tautan dokumen fitur |
+| Desain | [`design.md`](design.md) | Warna, tipografi, komponen, dan struktur halaman situs |
 
 ## Aturan menulis dokumen
 
