@@ -1,0 +1,9 @@
+# Rencana Implementasi
+
+Indeks fitur proyek: status, urutan fase, dan tautan ke dokumen fitur. Status hanya dicatat di sini, bukan di dokumen fitur. Aturan menulis dokumen: [`README.md`](README.md).
+
+## Status
+
+| Fase | Fitur | Dokumen | Status |
+| --- | --- | --- | --- |
+| - | Belum ada fitur | - | - |
