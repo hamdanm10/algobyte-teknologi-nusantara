@@ -27,14 +27,21 @@ Mengikuti [Angular Commit Message Convention](https://gist.github.com/nyancodeid
 
 ## Aturan Branch
 
-Repo ini belum memakai git. Aturan di bawah berlaku begitu repo dibuat; nama branch integrasi (misalnya `development`) ditetapkan saat itu dan dicatat di sini.
+Repo ada di `github.com/hamdanm10/algobyte-teknologi-nusantara`. Setiap fitur dikerjakan di **branch tersendiri**, dibuat dari branch `development`.
 
-- Setiap fitur dikerjakan di **branch tersendiri**. Satu branch hanya untuk satu fitur.
+| Branch | Fungsi |
+| --- | --- |
+| `main` | Kode yang sudah dirilis. Tidak dikerjakan langsung. Hanya menerima merge dari `development` untuk menandai rilis. |
+| `development` | Integrasi seluruh fitur dan basis untuk semua branch kerja. Tidak dikerjakan langsung. |
+| `<type>/<name>` | Pengerjaan satu fitur atau perubahan. |
+
+- Branch kerja digabung ke `development` melalui pull request, setelah fitur selesai dan test lulus.
+- Satu branch hanya untuk satu fitur.
 - Nama branch: bahasa Inggris, huruf kecil, `kebab-case`, berbentuk `<type>/<name>` dengan `<type>` mengikuti type commit (`feat/`, `fix/`, `docs/`, `build/`, `refactor/`, `test/`). Contoh: `feat/user-authentication`, `fix/duplicate-email-registration`.
-- Saat memulai fitur, cek branch aktif dengan `git branch --show-current`. Jika belum sesuai, buat branch kerja dari branch integrasi.
+- Saat memulai fitur, cek branch aktif dengan `git branch --show-current`. Jika belum sesuai, pindah ke `development`, ambil perubahan terbaru, lalu buat branch kerja: `git checkout development && git pull && git checkout -b feat/<name>`.
 - Jika ada perubahan yang belum di-commit saat berpindah branch, jangan dibuang. Commit atau stash terlebih dahulu, dan beri tahu pengguna.
 - Fitur tanpa test dianggap belum selesai dan tidak di-merge.
-- Jangan force push ke branch integrasi maupun `main`.
+- Jangan force push ke `development` maupun `main`.
 - Hapus branch kerja setelah berhasil di-merge.
 - **Sebelum merge, agent wajib bertanya kepada pengguna dan menunggu izin.** Jika proyek sudah punya deploy otomatis, tanyakan juga: dideploy sekarang atau ditunda?
 
