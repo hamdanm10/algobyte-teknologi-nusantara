@@ -127,6 +127,7 @@ Blog, detail proyek, dan studi kasus panjang **ditunda** sampai ada konten.
 | --- | --- |
 | Navigasi | Mengambang, `surface`, radius 8, bayangan navigasi. Mobile: tombol menu membuka panel penuh. Tautan aktif ditandai garis `brand` di bawahnya |
 | Tombol utama | Isian `brand`, teks `ink`, radius 6, padding 14×30. Hover: isian `plum`, teks `paper`. Satu tombol utama per layar |
+| Tombol gelap | Isian `ink`, teks `paper`, khusus di atas isian `brand` (panel ajakan) |
 | Tombol sekunder | Garis `ink` 1,5px, tanpa isian. Hover: isian `ink`, teks `paper` |
 | Tautan | `plum`, garis bawah selalu terlihat |
 | Kartu | `surface`, radius 12, bayangan kartu, tanpa batas. Seluruh kartu bisa diklik bila mengarah ke halaman lain |
@@ -135,6 +136,12 @@ Blog, detail proyek, dan studi kasus panjang **ditunda** sampai ada konten.
 | Footer | Latar `surface` dengan garis atas `line`, karena wordmark logo gelap tidak terbaca di latar `ink`. Tautan dikelompokkan, pengalih bahasa terlihat |
 
 Keadaan wajib ada untuk setiap komponen interaktif: normal, hover, fokus (cincin 2px `accent` berjarak 2px), aktif, nonaktif.
+
+## Ilustrasi
+
+Ilustrasi dibuat di Recraft oleh pemilik proyek. Situs menyediakan **slot** di hero, kartu layanan, baris "Kenapa bekerja dengan kami", panel ajakan, header tiap halaman, dan halaman galat. Slot menampilkan placeholder sampai file dipasang. Daftar slot, ukuran, nama file, dan arahan gaya: [`illustrations.md`](illustrations.md).
+
+Ilustrasi duduk di atas panel `brand-soft` bermotif titik (hero dan header halaman), tint warna merek (kartu layanan), atau `ink` (bagian gelap). Panel ajakan memakai isian `brand` penuh dengan tombol `ink`.
 
 ## Ilustrasi hero
 

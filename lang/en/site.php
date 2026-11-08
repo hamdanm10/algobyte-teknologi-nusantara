@@ -28,5 +28,8 @@ return [
         'terms' => 'Terms and conditions',
         'rights' => 'All rights reserved.',
     ],
+    'placeholder' => [
+        'title' => 'Illustration',
+    ],
     'description' => 'Algobyte Teknologi Nusantara builds websites, mobile apps, and custom systems for businesses.',
 ];

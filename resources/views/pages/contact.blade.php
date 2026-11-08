@@ -1,9 +1,5 @@
 <x-layout :title="__('contact.title')" :description="__('contact.lead')">
-    <section class="section pb-8 lg:pb-12">
-        <div class="container-site">
-            <x-section-heading :title="__('contact.title')" :lead="__('contact.lead')" :level="1" />
-        </div>
-    </section>
+    <x-page-header :title="__('contact.title')" :lead="__('contact.lead')" illustration="page-contact" />
 
     <section class="section pt-0 lg:pt-0" id="form">
         <div class="container-site">

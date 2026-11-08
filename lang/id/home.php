@@ -8,6 +8,7 @@ return [
         'title' => 'Perangkat lunak yang dibangun sesuai cara bisnis Anda bekerja',
         'lead' => 'Algobyte Teknologi Nusantara merancang dan membangun situs web, aplikasi, dan sistem internal, dari diskusi awal sampai berjalan di produksi.',
         'primary' => 'Jadwalkan konsultasi',
+        'points' => ['Rancangan ditinjau sebelum kode', 'Diuji sebelum diserahkan', 'Didokumentasikan lengkap'],
         'secondary' => 'Lihat layanan',
     ],
     'services' => [

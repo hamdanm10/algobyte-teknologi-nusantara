@@ -92,4 +92,23 @@ class PublicPagesTest extends TestCase
     {
         $this->assertSame(1, substr_count($this->get('/')->getContent(), '<h1'));
     }
+
+    public function test_illustration_slot_shows_a_placeholder_until_the_file_exists(): void
+    {
+        $this->get('/layanan')->assertSee('data-illustration="page-services"', false);
+    }
+
+    public function test_illustration_file_replaces_the_placeholder(): void
+    {
+        $path = public_path('images/illustrations/page-services.svg');
+        file_put_contents($path, '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"></svg>');
+
+        try {
+            $this->get('/layanan')
+                ->assertDontSee('data-illustration="page-services"', false)
+                ->assertSee('images/illustrations/page-services.svg', false);
+        } finally {
+            unlink($path);
+        }
+    }
 }

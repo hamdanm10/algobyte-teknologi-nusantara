@@ -1,14 +1,10 @@
 <x-layout :title="__('services.title')" :description="__('services.lead')">
-    <section class="section pb-8 lg:pb-12">
-        <div class="container-site">
-            <x-section-heading :title="__('services.title')" :lead="__('services.lead')" :level="1" />
-        </div>
-    </section>
+    <x-page-header :title="__('services.title')" :lead="__('services.lead')" illustration="page-services" />
 
-    <section class="section pt-0 lg:pt-0">
+    <section class="section pt-4 lg:pt-8">
         <div class="container-site grid gap-6 sm:grid-cols-2">
-            @foreach ($services as $slug)
-                <x-service-card :slug="$slug" />
+            @foreach ($services as $i => $slug)
+                <x-service-card :slug="$slug" :tint="['bg-brand-soft', 'bg-accent/10', 'bg-plum/10', 'bg-highlight/25'][$i % 4]" />
             @endforeach
         </div>
     </section>

@@ -28,5 +28,8 @@ return [
         'terms' => 'Syarat dan ketentuan',
         'rights' => 'Hak cipta dilindungi.',
     ],
+    'placeholder' => [
+        'title' => 'Ilustrasi',
+    ],
     'description' => 'Algobyte Teknologi Nusantara membangun situs web, aplikasi mobile, dan sistem kustom untuk bisnis.',
 ];

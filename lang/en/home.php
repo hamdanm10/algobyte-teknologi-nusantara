@@ -8,6 +8,7 @@ return [
         'title' => 'Software built around how your business works',
         'lead' => 'Algobyte Teknologi Nusantara designs and builds websites, apps, and internal systems, from the first conversation to running in production.',
         'primary' => 'Book a consultation',
+        'points' => ['Design reviewed before code', 'Tested before handover', 'Fully documented'],
         'secondary' => 'See services',
     ],
     'services' => [

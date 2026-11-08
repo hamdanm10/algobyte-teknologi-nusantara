@@ -1,9 +1,5 @@
 <x-layout :title="__('about.title')" :description="__('about.lead')">
-    <section class="section pb-8 lg:pb-12">
-        <div class="container-site">
-            <x-section-heading :title="__('about.title')" :lead="__('about.lead')" :level="1" />
-        </div>
-    </section>
+    <x-page-header :title="__('about.title')" :lead="__('about.lead')" illustration="page-about" />
 
     <section class="section pt-8 lg:pt-12" aria-labelledby="what-title">
         <div class="container-site grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">

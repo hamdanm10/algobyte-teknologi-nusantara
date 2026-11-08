@@ -123,6 +123,17 @@
         color: var(--color-accent);
     }
 
+    /* Dot grid texture: a quiet pattern behind illustrations and on the brand panel. */
+    .bg-dots {
+        background-image: radial-gradient(circle, rgb(100 13 95 / 0.16) 1.5px, transparent 1.5px);
+        background-size: 22px 22px;
+    }
+
+    .bg-dots-ink {
+        background-image: radial-gradient(circle, rgb(31 10 30 / 0.16) 1.5px, transparent 1.5px);
+        background-size: 22px 22px;
+    }
+
     /* Hero blocks: assemble once on first load. */
     .block-rise {
         animation: block-rise 900ms var(--ease-framer) both;

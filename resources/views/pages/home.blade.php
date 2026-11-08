@@ -1,7 +1,7 @@
 <x-layout :title="__('home.title')" :description="__('site.description')">
     {{-- Hero --}}
-    <section class="section pb-12 pt-10 lg:pb-20 lg:pt-16">
-        <div class="container-site grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+    <section class="section relative overflow-hidden pb-12 pt-10 lg:pb-24 lg:pt-16">
+        <div class="container-site grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div>
                 <h1 class="text-hero max-w-[18ch] sm:max-w-[20ch]">{{ __('home.hero.title') }}</h1>
                 <p class="text-lead mt-6 max-w-prose">{{ __('home.hero.lead') }}</p>
@@ -9,8 +9,21 @@
                     <x-button :href="localized_route('contact')">{{ __('home.hero.primary') }}</x-button>
                     <x-button :href="localized_route('services')" variant="secondary">{{ __('home.hero.secondary') }}</x-button>
                 </div>
+                <ul class="mt-10 flex flex-wrap gap-x-6 gap-y-3">
+                    @foreach (__('home.hero.points') as $point)
+                        <li class="flex items-center gap-2 font-medium">
+                            <x-icon name="check" class="size-5 text-plum" />
+                            {{ $point }}
+                        </li>
+                    @endforeach
+                </ul>
             </div>
-            <x-hero-blocks class="mx-auto max-w-md lg:max-w-none" />
+            <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+                <div class="bg-dots absolute -inset-4 rounded-panel bg-brand-soft lg:-inset-6" aria-hidden="true"></div>
+                <x-illustration name="hero" ratio="6/5" size="1200×1000" class="relative" eager>
+                    <x-hero-blocks class="mx-auto max-w-sm py-6" />
+                </x-illustration>
+            </div>
         </div>
     </section>
 
@@ -24,23 +37,23 @@
                 </div>
                 <a href="{{ localized_route('services') }}" class="link py-2 font-medium">{{ __('home.services.all') }}</a>
             </div>
-            <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                @foreach ($services as $slug)
-                    <x-service-card :slug="$slug" />
+            <div class="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+                @foreach ($services as $i => $slug)
+                    <x-service-card :slug="$slug" :tint="['bg-brand-soft', 'bg-accent/10', 'bg-plum/10', 'bg-highlight/25'][$i % 4]" />
                 @endforeach
             </div>
         </div>
     </section>
 
     {{-- Process: a real sequence, so the steps are numbered. --}}
-    <section class="section" aria-labelledby="process-title">
+    <section class="section border-y border-line bg-surface" aria-labelledby="process-title">
         <div class="container-site">
             <x-section-heading :title="__('home.process.title')" :lead="__('home.process.lead')" id="process-title" />
-            <ol class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach (__('home.process.steps') as $i => $step)
-                    <li class="border-t-2 border-ink pt-5">
-                        <span class="font-display text-4xl font-semibold text-plum">{{ $i + 1 }}</span>
-                        <h3 class="text-card-title mt-3">{{ $step['title'] }}</h3>
+                    <li class="relative rounded-panel bg-paper p-6 pt-12 sm:p-7 sm:pt-14">
+                        <span class="absolute left-6 top-0 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-control bg-brand font-display text-xl font-semibold text-ink sm:left-7">{{ $i + 1 }}</span>
+                        <h3 class="text-card-title">{{ $step['title'] }}</h3>
                         <p class="mt-3 text-ink-muted">{{ $step['body'] }}</p>
                     </li>
                 @endforeach
@@ -48,18 +61,21 @@
         </div>
     </section>
 
-    {{-- Why us --}}
+    {{-- Why us: alternating rows, each with its own illustration. --}}
     <section class="section bg-ink text-paper" aria-labelledby="why-title">
-        <div class="container-site grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div class="container-site">
             <x-section-heading :title="__('home.why.title')" :lead="__('home.why.lead')" tone="dark" id="why-title" />
-            <ul class="divide-y divide-paper/20 border-y border-paper/20">
-                @foreach (__('home.why.points') as $point)
-                    <li class="py-7">
-                        <h3 class="text-card-title !text-highlight">{{ $point['title'] }}</h3>
-                        <p class="mt-2 max-w-prose text-paper/80">{{ $point['body'] }}</p>
-                    </li>
+            <div class="mt-14 space-y-16 lg:space-y-24">
+                @foreach (__('home.why.points') as $i => $point)
+                    <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-20">
+                        <div class="{{ $i % 2 ? 'lg:order-2' : '' }}">
+                            <h3 class="text-card-title !text-highlight">{{ $point['title'] }}</h3>
+                            <p class="mt-3 max-w-prose text-lg text-paper/80">{{ $point['body'] }}</p>
+                        </div>
+                        <x-illustration :name="['feature-team', 'feature-design', 'feature-maintain'][$i]" ratio="3/2" size="1200×800" tone="dark" class="{{ $i % 2 ? 'lg:order-1' : '' }}" />
+                    </div>
                 @endforeach
-            </ul>
+            </div>
         </div>
     </section>
 

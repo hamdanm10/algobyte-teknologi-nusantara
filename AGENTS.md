@@ -106,3 +106,4 @@ Dokumen rancangan ada di `docs/`, per fitur, dengan satu `implementation-plan.md
 | [`docs/README.md`](docs/README.md) | Peta dokumentasi dan panduan menulis dokumen |
 | [`docs/implementation-plan.md`](docs/implementation-plan.md) | Indeks fitur: status, urutan fase, tautan ke dokumen fitur |
 | [`docs/design.md`](docs/design.md) | Desain situs: warna logo, tipografi, komponen, struktur halaman |
+| [`docs/illustrations.md`](docs/illustrations.md) | Slot ilustrasi, ukuran, dan arahan membuatnya |

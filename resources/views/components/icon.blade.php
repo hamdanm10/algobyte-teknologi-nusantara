@@ -18,6 +18,11 @@
             <path d="M14.5 6.5a4 4 0 0 0 5 5L10 21l-3-3 9.5-9.5" />
             <path d="m6 6 3 3M3.5 3.5 6 6" />
             @break
+        @case('image')
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <circle cx="9" cy="10" r="1.5" />
+            <path d="m21 16-5-5-8 9" />
+            @break
         @case('check')
             <path d="m5 12.5 4.5 4.5L19 7.5" />
             @break
