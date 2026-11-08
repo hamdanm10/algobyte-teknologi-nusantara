@@ -71,6 +71,15 @@
     }
 }
 
+/* Extend an element from the content box to the viewport edge, keeping the text inside the container. */
+@utility bleed-r {
+    margin-right: calc(-1 * max(var(--gutter), (100vw - 1172px) / 2));
+}
+
+@utility bleed-l {
+    margin-left: calc(-1 * max(var(--gutter), (100vw - 1172px) / 2));
+}
+
 @layer components {
     .text-hero {
         font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4rem);
@@ -134,25 +143,24 @@
         background-size: 22px 22px;
     }
 
-    /* Hero blocks: assemble once on first load. */
-    .block-rise {
-        animation: block-rise 900ms var(--ease-framer) both;
-        animation-delay: var(--delay, 0ms);
+    /* One entrance on first load: the hero illustration slides in from the edge it bleeds to. */
+    .hero-enter {
+        animation: hero-enter 800ms var(--ease-framer) both;
     }
 
-    @keyframes block-rise {
+    @keyframes hero-enter {
         from {
             opacity: 0;
-            transform: translateY(48px);
+            transform: translateX(32px);
         }
         to {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
         }
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .block-rise {
+        .hero-enter {
             animation: none;
         }
     }

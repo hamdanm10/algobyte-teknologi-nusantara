@@ -10,7 +10,7 @@
                     <x-button :href="$href ?? localized_route('contact')" variant="dark" class="mt-8">{{ $button }}</x-button>
                 </div>
                 <div class="mx-auto w-full max-w-xs lg:max-w-none lg:self-end lg:pt-10">
-                    <x-illustration name="cta" ratio="1/1" size="800×800" />
+                    <x-illustration name="cta" ratio="4/3" size="1200×900" />
                 </div>
             </div>
         </div>

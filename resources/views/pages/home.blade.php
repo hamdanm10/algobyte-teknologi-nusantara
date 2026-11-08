@@ -1,9 +1,9 @@
 <x-layout :title="__('home.title')" :description="__('site.description')">
     {{-- Hero --}}
-    <section class="section relative overflow-hidden pb-12 pt-10 lg:pb-24 lg:pt-16">
-        <div class="container-site grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+    <section class="section overflow-hidden pb-12 pt-10 lg:pb-20 lg:pt-14">
+        <div class="container-site grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-12">
             <div>
-                <h1 class="text-hero max-w-[18ch] sm:max-w-[20ch]">{{ __('home.hero.title') }}</h1>
+                <h1 class="text-hero max-w-[18ch]">{{ __('home.hero.title') }}</h1>
                 <p class="text-lead mt-6 max-w-prose">{{ __('home.hero.lead') }}</p>
                 <div class="mt-9 flex flex-wrap gap-4">
                     <x-button :href="localized_route('contact')">{{ __('home.hero.primary') }}</x-button>
@@ -18,12 +18,9 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="relative mx-auto w-full max-w-md lg:max-w-none">
-                <div class="bg-dots absolute -inset-4 rounded-panel bg-brand-soft lg:-inset-6" aria-hidden="true"></div>
-                <x-illustration name="hero" ratio="6/5" size="1200×1000" class="relative" eager>
-                    <x-hero-blocks class="mx-auto max-w-sm py-6" />
-                </x-illustration>
-            </div>
+            <x-bleed side="right" class="hero-enter">
+                <x-illustration name="hero" ratio="16/9" size="1600×900" bleed eager />
+            </x-bleed>
         </div>
     </section>
 
@@ -46,7 +43,7 @@
     </section>
 
     {{-- Process: a real sequence, so the steps are numbered. --}}
-    <section class="section border-y border-line bg-surface" aria-labelledby="process-title">
+    <section class="section overflow-hidden border-y border-line bg-surface pb-0 lg:pb-0" aria-labelledby="process-title">
         <div class="container-site">
             <x-section-heading :title="__('home.process.title')" :lead="__('home.process.lead')" id="process-title" />
             <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -59,20 +56,24 @@
                 @endforeach
             </ol>
         </div>
+        <x-illustration name="process" ratio="4/1" size="2400×600" bleed class="mt-14" />
     </section>
 
-    {{-- Why us: alternating rows, each with its own illustration. --}}
-    <section class="section bg-ink text-paper" aria-labelledby="why-title">
+    {{-- Why us: alternating rows. The illustration runs to the viewport edge on the side opposite the text. --}}
+    <section class="section overflow-hidden bg-ink text-paper" aria-labelledby="why-title">
         <div class="container-site">
             <x-section-heading :title="__('home.why.title')" :lead="__('home.why.lead')" tone="dark" id="why-title" />
-            <div class="mt-14 space-y-16 lg:space-y-24">
+            <div class="mt-14 space-y-14 lg:space-y-20">
                 @foreach (__('home.why.points') as $i => $point)
-                    <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-20">
-                        <div class="{{ $i % 2 ? 'lg:order-2' : '' }}">
+                    @php($flip = $i % 2 === 1)
+                    <div class="grid items-center gap-8 lg:gap-12 {{ $flip ? 'lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]' : 'lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]' }}">
+                        <div class="{{ $flip ? 'lg:order-2' : '' }}">
                             <h3 class="text-card-title !text-highlight">{{ $point['title'] }}</h3>
                             <p class="mt-3 max-w-prose text-lg text-paper/80">{{ $point['body'] }}</p>
                         </div>
-                        <x-illustration :name="['feature-team', 'feature-design', 'feature-maintain'][$i]" ratio="3/2" size="1200×800" tone="dark" class="{{ $i % 2 ? 'lg:order-1' : '' }}" />
+                        <x-bleed :side="$flip ? 'left' : 'right'" class="{{ $flip ? 'lg:order-1' : '' }}">
+                            <x-illustration :name="['feature-team', 'feature-design', 'feature-maintain'][$i]" ratio="16/9" size="1600×900" tone="dark" bleed />
+                        </x-bleed>
                     </div>
                 @endforeach
             </div>
@@ -80,9 +81,14 @@
     </section>
 
     {{-- FAQ --}}
-    <section class="section" aria-labelledby="faq-title">
+    <section class="section overflow-hidden" aria-labelledby="faq-title">
         <div class="container-site grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-            <x-section-heading :title="__('home.faq.title')" :lead="__('home.faq.lead')" id="faq-title" />
+            <div>
+                <x-section-heading :title="__('home.faq.title')" :lead="__('home.faq.lead')" id="faq-title" />
+                <x-bleed side="left" class="mt-10 hidden lg:block">
+                    <x-illustration name="faq" ratio="4/3" size="1200×900" bleed />
+                </x-bleed>
+            </div>
             <div class="divide-y divide-line border-y border-line">
                 @foreach (__('home.faq.items') as $item)
                     <details class="group py-1">

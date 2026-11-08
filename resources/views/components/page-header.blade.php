@@ -1,14 +1,13 @@
-@props(['title', 'lead' => null, 'illustration', 'size' => '1200×1000'])
+@props(['title', 'lead' => null, 'illustration', 'size' => '1600×900'])
 
-<section class="section relative overflow-hidden pb-10 pt-10 lg:pb-16 lg:pt-16">
-    <div class="container-site grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+<section class="section overflow-hidden pb-10 pt-10 lg:pb-16 lg:pt-14">
+    <div class="container-site grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-12">
         <div>
             <x-section-heading :title="$title" :lead="$lead" :level="1" />
             {{ $slot }}
         </div>
-        <div class="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div class="bg-dots absolute -inset-3 rounded-panel bg-brand-soft" aria-hidden="true"></div>
-            <x-illustration :name="$illustration" ratio="6/5" :size="$size" class="relative" eager />
-        </div>
+        <x-bleed side="right">
+            <x-illustration :name="$illustration" ratio="16/9" :size="$size" bleed eager />
+        </x-bleed>
     </div>
 </section>

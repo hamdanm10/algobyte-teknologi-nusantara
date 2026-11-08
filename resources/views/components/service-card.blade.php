@@ -3,7 +3,7 @@
 <a href="{{ localized_route('services.show', ['slug' => $slug]) }}"
    class="group flex h-full flex-col overflow-hidden rounded-panel bg-surface shadow-card transition-shadow duration-200 hover:shadow-nav">
     <div class="{{ $tint }} p-4">
-        <x-illustration :name="'service-'.$slug" ratio="4/3" size="1200×900" />
+        <x-illustration :name="'service-'.$slug" ratio="3/2" size="1200×800" />
     </div>
     <div class="flex flex-1 flex-col p-6 sm:p-7">
         <span class="flex size-10 items-center justify-center rounded-control bg-brand-soft text-plum">

@@ -6,7 +6,7 @@ Pedoman visual untuk landing page dan halaman publik Algobyte Teknologi Nusantar
 
 ### Arah
 
-Situs perusahaan perangkat lunak yang tenang dan rapi, dengan **satu hal yang diingat**: balok isometrik dari logo, dipakai sebagai ilustrasi hero yang tersusun saat halaman dibuka. Selain itu halaman dibuat diam: latar terang, tipografi besar, kartu sederhana.
+Situs perusahaan perangkat lunak yang tenang dan rapi, dengan **satu hal yang diingat**: ilustrasi lebar yang menembus tepi layar, bergantian di sisi kanan dan kiri seperti di qvery.ai, sementara teks tetap di dalam container. Selain itu halaman dibuat tenang: latar terang, tipografi besar, kartu sederhana.
 
 Dari qvery.ai diambil: hero dua kolom (teks kiri, ilustrasi kanan), lebar isi 1172px, bar navigasi mengambang dengan bayangan lembut, kartu radius 12, tombol radius 6, bagian "Before We Start" (FAQ), bagian industri/layanan berbentuk kartu, dan nada tulisan yang pendek dan lugas. **Tidak diambil**: palet teal dan biru, font Lato/Inter, teks huruf kapital untuk callout, dan latar biru-dingin `#F6F8FF` (bentrok dengan oranye logo).
 
@@ -70,10 +70,10 @@ Radius dibedakan menurut hierarki (kecil untuk kontrol, besar untuk wadah), tida
 
 ### Gerak
 
-- **Satu momen**: balok hero tersusun dalam sekitar 900ms saat halaman pertama dibuka, memakai kurva `cubic-bezier(.44, 0, .56, 1)` seperti qvery.ai. Hanya sekali per kunjungan.
+- **Satu momen**: ilustrasi hero meluncur masuk dari tepi kanan dalam 800ms saat halaman pertama dibuka, memakai kurva `cubic-bezier(.44, 0, .56, 1)` seperti qvery.ai. Hanya sekali per kunjungan.
 - Respons terhadap aksi pengguna: hover dan fokus tombol, buka-tutup FAQ, menu mobile. Durasi 150 sampai 250ms.
 - Tidak ada animasi masuk per seksi, tidak ada parallax, tidak ada hover bergerak di setiap kartu.
-- `prefers-reduced-motion`: balok langsung tampil dalam posisi akhir, tanpa transisi.
+- `prefers-reduced-motion`: ilustrasi langsung tampil di posisi akhir, tanpa transisi.
 
 ## Struktur halaman
 
@@ -98,18 +98,19 @@ Blog, detail proyek, dan studi kasus panjang **ditunda** sampai ada konten.
 ┌───────────────────────────────────────────────┐
 │ [logo]   Layanan Proyek Tentang    id en [Hubungi kami] │  navigasi mengambang
 ├───────────────────────────────────────────────┤
-│  Judul hero, rata kiri          ┌──────────┐  │
-│  maksimal 3 baris               │  balok   │  │  hero
-│  pengantar 1-2 kalimat          │ isometrik│  │
-│  [Jadwalkan konsultasi] [Lihat layanan]       │
+│  Judul hero, rata kiri     ┌─────────────────────  hero: ilustrasi lebar 16:9
+│  pengantar 1-2 kalimat     │  ilustrasi lebar ──►  menembus tepi kanan
+│  [Jadwalkan konsultasi] [Lihat layanan]  └──────────────────
 ├───────────────────────────────────────────────┤
 │  Layanan: 3 sampai 4 kartu, ikon + 2 kalimat  │
 ├───────────────────────────────────────────────┤
 │  Cara kerja: 4 langkah berurutan (bernomor)   │
+│  ═══ ilustrasi panjang selebar layar ═══════  │
 ├───────────────────────────────────────────────┤
-│  Seksi gelap (ink): alasan memilih Algobyte   │
+│  Seksi gelap (ink): 3 baris bergantian,       │
+│  teks ◄─► ilustrasi menembus kiri / kanan     │
 ├───────────────────────────────────────────────┤
-│  Sebelum mulai: FAQ 6 sampai 8 pertanyaan     │
+│  Sebelum mulai: FAQ + ilustrasi tepi kiri     │
 ├───────────────────────────────────────────────┤
 │  Ajakan penutup + tombol                      │
 ├───────────────────────────────────────────────┤
@@ -118,7 +119,8 @@ Blog, detail proyek, dan studi kasus panjang **ditunda** sampai ada konten.
 ```
 
 - Penomoran **hanya** di "Cara kerja", karena isinya memang urutan. Seksi lain tidak bernomor.
-- Hero rata kiri di desktop, ilustrasi di bawah teks di mobile.
+- Hero rata kiri di desktop. Di mobile ilustrasi turun ke bawah teks dan memakai lebar layar penuh.
+- **Ilustrasi menembus tepi** hanya di desktop (mulai 1024px) dan hanya pada sisi yang menjauhi teks. Teks, kartu, dan tombol tetap di dalam container 1172px. Dipasang lewat komponen `x-bleed` (kiri atau kanan) dan utilitas `bleed-l`/`bleed-r` di `app.css`; bagian pembungkusnya memakai `overflow-hidden`.
 - Bagian bukti sosial (logo klien, angka) hanya dipasang bila datanya nyata. Tidak ada angka karangan.
 
 ## Komponen
@@ -139,13 +141,11 @@ Keadaan wajib ada untuk setiap komponen interaktif: normal, hover, fokus (cincin
 
 ## Ilustrasi
 
-Ilustrasi dibuat di Recraft oleh pemilik proyek. Situs menyediakan **slot** di hero, kartu layanan, baris "Kenapa bekerja dengan kami", panel ajakan, header tiap halaman, dan halaman galat. Slot menampilkan placeholder sampai file dipasang. Daftar slot, ukuran, nama file, dan arahan gaya: [`illustrations.md`](illustrations.md).
+Ilustrasi dibuat di Recraft oleh pemilik proyek. **Bentuknya lebar (landscape), gaya datar 2D, bukan 3D.** Rasio 16:9 untuk hero, header halaman, dan baris fitur; 4:1 untuk ilustrasi panjang selebar layar di bagian "Cara kerja"; 3:2 untuk kartu layanan.
 
-Ilustrasi duduk di atas panel `brand-soft` bermotif titik (hero dan header halaman), tint warna merek (kartu layanan), atau `ink` (bagian gelap). Panel ajakan memakai isian `brand` penuh dengan tombol `ink`.
+Situs menyediakan **slot** di hero, kartu layanan, "Cara kerja", baris "Kenapa bekerja dengan kami", FAQ, panel ajakan, header tiap halaman, dan halaman galat. Slot menampilkan placeholder sampai file dipasang. Daftar slot, ukuran, nama file, dan arahan gaya: [`illustrations.md`](illustrations.md).
 
-## Ilustrasi hero
-
-Tiga balok isometrik dari logo (dua tegak, satu kecil di atas), masing-masing dengan tiga sisi: `brand`, `accent`, `plum`, dan `highlight` untuk balok kecil. Dibuat sebagai SVG inline, bukan gambar raster. Balok naik ke posisinya berurutan (kiri, tengah, atas). Di mobile ukurannya mengecil, bentuk tetap.
+Latar ilustrasi: transparan di atas `paper` (hero, header halaman, FAQ), tint warna merek (kartu layanan), atau `ink` (baris di bagian gelap). Panel ajakan memakai isian `brand` penuh dengan tombol `ink`.
 
 Logo dipakai apa adanya dan tidak diubah warnanya, jadi selalu ditaruh di latar terang. `logo-2.png` (susun vertikal) untuk footer dan halaman legal, `logo(1).png` (mendatar) untuk navigasi, `favicon.png` untuk ikon tab. Berkas aslinya raster; kerjakan versi SVG bila tersedia dari pemilik logo.
 
