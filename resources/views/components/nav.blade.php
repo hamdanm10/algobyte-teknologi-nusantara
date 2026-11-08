@@ -15,7 +15,7 @@
                 <x-logo class="h-8 w-auto" />
             </a>
 
-            <nav class="hidden items-center gap-1 lg:flex" aria-label="{{ __('site.nav.label') }}">
+            <nav class="hidden flex-1 items-center gap-1 lg:ml-6 lg:flex" aria-label="{{ __('site.nav.label') }}">
                 @foreach ($links as $key => $label)
                     <a href="{{ localized_route($key) }}"
                        @if ($current === $key) aria-current="page" @endif
