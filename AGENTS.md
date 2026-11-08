@@ -9,7 +9,7 @@ Aplikasi Laravel untuk Algobyte Teknologi Nusantara. Saat ini belum ada API: ant
 - **Dokumentasi** (file `.md` seperti README, docs, changelog, dan catatan): gunakan **bahasa Indonesia**.
 - **Kode**: gunakan **bahasa Inggris** untuk nama variabel, fungsi, class, method, route, dan komentar kode.
 - **Database**: gunakan **bahasa Inggris** untuk nama tabel, kolom, index, dan migration.
-- **Pesan untuk pengguna** (validasi, error, email, notifikasi): jangan ditulis langsung di kode, simpan di `lang/` dan panggil lewat `__()`/`trans()`. Locale bawaan `id` (`APP_LOCALE=id`) dan fallback `en`. Landing page dan aplikasi menyediakan dua bahasa, Indonesia (`lang/id`) dan Inggris (`lang/en`): setiap teks baru wajib ditambahkan di kedua berkas. Nama kolom di pesan validasi diatur di `attributes` pada `validation.php` tiap bahasa. Kunci terjemahan tetap bahasa Inggris.
+- **Pesan untuk pengguna** (validasi, error, email, notifikasi): jangan ditulis langsung di kode, simpan di `lang/` dan panggil lewat `__()`/`trans()`. Locale bawaan `id` (`APP_LOCALE=id`) dan fallback `en`. Landing page dan aplikasi menyediakan dua bahasa, Indonesia (`lang/id`) dan Inggris (`lang/en`): setiap teks baru wajib ditambahkan di kedua berkas. Nama kolom di pesan validasi diatur lewat method `attributes()` di Form Request, dengan teks dari `lang/*/*.php`, supaya aman saat `validation.php` diperbarui oleh `laravel-lang`. Setelah `lang:update`, jalankan `vendor/bin/pint lang`. Kunci terjemahan tetap bahasa Inggris.
 - **Lainnya**: pesan commit, nama branch, dan identifier teknis lain menggunakan bahasa Inggris.
 
 ## Aturan Commit
@@ -72,7 +72,8 @@ Repo ada di `github.com/hamdanm10/algobyte-teknologi-nusantara`. Setiap fitur di
 - Cakup jalur berhasil, jalur gagal (validasi, akses ditolak, tidak terautentikasi), dan kasus batas.
 - Perbaikan bug disertai test yang gagal sebelum perbaikan dan lulus sesudahnya.
 - Semua test harus lulus sebelum commit dan sebelum merge.
-- Test tidak boleh menyentuh data asli. Gunakan database terpisah untuk test, dan jangan menulis migration atau query yang hanya jalan di satu jenis database bila aplikasi memakai jenis lain.
+- **Semua test berjalan di PostgreSQL**, jenis database yang sama dengan aplikasi, bukan SQLite. Database test adalah `algobyte_teknologi_nusantara_testing` (diatur paksa di `phpunit.xml`). `tests/TestCase.php` menolak menjalankan test pada database yang namanya tidak berakhiran `_testing`; jangan menghapus pengaman ini. Buat database test sekali: `create database algobyte_teknologi_nusantara_testing`.
+- Jangan menulis migration atau query yang hanya jalan di satu jenis database.
 - Setiap daftar data yang punya relasi wajib punya test yang memastikan jumlah query tidak bertambah saat baris bertambah.
 
 ## Tooling

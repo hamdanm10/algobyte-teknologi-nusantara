@@ -84,31 +84,28 @@ Beranda                /
 Layanan                /layanan            (en: /en/services)
   Detail layanan       /layanan/{slug}
 Proyek                 /proyek             (en: /en/projects)
-  Detail proyek        /proyek/{slug}
 Tentang                /tentang            (en: /en/about)
 Kontak                 /kontak             (en: /en/contact)
 Kebijakan privasi      /kebijakan-privasi  (en: /en/privacy-policy)
 Syarat dan ketentuan   /syarat-ketentuan   (en: /en/terms)
 ```
 
-Blog dan studi kasus panjang **ditunda** sampai ada konten.
+Blog, detail proyek, dan studi kasus panjang **ditunda** sampai ada konten.
 
 ### Beranda
 
 ```
 ┌───────────────────────────────────────────────┐
-│ [logo]   Layanan Proyek Tentang    ID|EN [Hubungi kami] │  navigasi mengambang
+│ [logo]   Layanan Proyek Tentang    id en [Hubungi kami] │  navigasi mengambang
 ├───────────────────────────────────────────────┤
 │  Judul hero, rata kiri          ┌──────────┐  │
 │  maksimal 3 baris               │  balok   │  │  hero
 │  pengantar 1-2 kalimat          │ isometrik│  │
-│  [Mulai proyek] [Lihat proyek]  └──────────┘  │
+│  [Jadwalkan konsultasi] [Lihat layanan]       │
 ├───────────────────────────────────────────────┤
 │  Layanan: 3 sampai 4 kartu, ikon + 2 kalimat  │
 ├───────────────────────────────────────────────┤
 │  Cara kerja: 4 langkah berurutan (bernomor)   │
-├───────────────────────────────────────────────┤
-│  Proyek pilihan: 2 sampai 3 kartu besar       │
 ├───────────────────────────────────────────────┤
 │  Seksi gelap (ink): alasan memilih Algobyte   │
 ├───────────────────────────────────────────────┤
@@ -135,7 +132,7 @@ Blog dan studi kasus panjang **ditunda** sampai ada konten.
 | Kartu | `surface`, radius 12, bayangan kartu, tanpa batas. Seluruh kartu bisa diklik bila mengarah ke halaman lain |
 | FAQ | Elemen `<details>`; panah memutar saat terbuka. Judul pertanyaan memakai gaya judul kartu |
 | Formulir | Label di atas kolom, kolom `surface` dengan batas `line`, fokus: garis `accent` 2px. Pesan galat menyebut apa yang salah dan cara memperbaikinya |
-| Footer | Latar `ink`, teks `paper`, tautan dikelompokkan, pengalih bahasa terlihat |
+| Footer | Latar `surface` dengan garis atas `line`, karena wordmark logo gelap tidak terbaca di latar `ink`. Tautan dikelompokkan, pengalih bahasa terlihat |
 
 Keadaan wajib ada untuk setiap komponen interaktif: normal, hover, fokus (cincin 2px `accent` berjarak 2px), aktif, nonaktif.
 
@@ -143,7 +140,7 @@ Keadaan wajib ada untuk setiap komponen interaktif: normal, hover, fokus (cincin
 
 Tiga balok isometrik dari logo (dua tegak, satu kecil di atas), masing-masing dengan tiga sisi: `brand`, `accent`, `plum`, dan `highlight` untuk balok kecil. Dibuat sebagai SVG inline, bukan gambar raster. Balok naik ke posisinya berurutan (kiri, tengah, atas). Di mobile ukurannya mengecil, bentuk tetap.
 
-Logo dipakai apa adanya dan tidak diubah warnanya. `logo-2.png` (susun vertikal) untuk footer dan halaman legal, `logo(1).png` (mendatar) untuk navigasi, `favicon.png` untuk ikon tab. Berkas aslinya raster; kerjakan versi SVG bila tersedia dari pemilik logo.
+Logo dipakai apa adanya dan tidak diubah warnanya, jadi selalu ditaruh di latar terang. `logo-2.png` (susun vertikal) untuk footer dan halaman legal, `logo(1).png` (mendatar) untuk navigasi, `favicon.png` untuk ikon tab. Berkas aslinya raster; kerjakan versi SVG bila tersedia dari pemilik logo.
 
 ## Gaya tulisan
 
@@ -165,20 +162,20 @@ Logo dipakai apa adanya dan tidak diubah warnanya. `logo-2.png` (susun vertikal)
 
 - Blade dengan layout `resources/views/layouts/app.blade.php` dan komponen anonim di `resources/views/components` (navigasi, tombol, kartu, FAQ, footer). Halaman di `resources/views/pages`.
 - Token warna dan font didefinisikan di `@theme` pada `resources/css/app.css`, tidak ada nilai warna mentah di Blade.
-- Satu controller per halaman statis atau `Route::view` bila tanpa data; formulir kontak lewat Action dan Form Request, sesuai `AGENTS.md`.
+- Route didaftarkan sekali per bahasa dengan nama `{kunci}.{bahasa}` (contoh `services.en`); slug tiap bahasa ada di `lang/{bahasa}/routes.php`. Di Blade pakai `localized_route('services')`. Bahasa dipilih dari segmen pertama path oleh middleware `SetLocaleFromPath`.
+- Controller per kelompok halaman; formulir kontak lewat Action dan Form Request, sesuai `AGENTS.md`. Pesan formulir disimpan di tabel `contact_messages` (belum dikirim ke email, karena alamat penerima belum ada).
 - Tidak ada framework JavaScript. Skrip kecil hanya untuk menu mobile dan pengalih bahasa.
 
 ## Langkah dan test
 
-1. Tinjau dokumen ini, lalu putuskan hal di bagian **Ditunda**.
-2. Pasang font, token tema, dan layout dasar.
-3. Bangun komponen, lalu Beranda, lalu halaman lain satu per satu.
-4. Feature test: setiap halaman mengembalikan 200 di kedua bahasa, `hreflang` benar, formulir kontak menolak data tidak valid dan menyimpan atau mengirim data valid.
-5. Periksa kontras tiap pasangan warna, tampilan 360px, dan navigasi keyboard.
+1. Pasang font, token tema, dan layout dasar. *(selesai)*
+2. Bangun komponen, lalu Beranda, lalu halaman lain. *(selesai)*
+3. Feature test: setiap halaman mengembalikan 200 di kedua bahasa, `hreflang` benar, 404 memakai bahasa path, formulir kontak menolak data tidak valid, honeypot, throttle, dan menyimpan data valid. *(selesai)*
+4. Periksa kontras tiap pasangan warna dan navigasi keyboard secara manual.
 
 ## Ditunda
 
-- Blog, studi kasus panjang, dan halaman tim, sampai kontennya ada.
+- Blog, studi kasus panjang, halaman tim, bagian "Proyek pilihan" di beranda, dan halaman detail proyek, sampai ada proyek nyata. Halaman `/proyek` sementara menampilkan keadaan kosong.
 - Mode gelap penuh. Situs hanya memakai seksi gelap di tengah halaman.
 - Isi nyata: daftar layanan, proyek, kontak, dan alamat. Sampai tersedia, halaman memakai teks sementara yang ditandai jelas dan tidak berisi angka atau klien karangan.
 - Versi SVG logo.
